@@ -4,7 +4,7 @@ import React from 'react';
 const ChatScreen = () => {
   return (
     <View>
-      <Text>I am the chat screemn</Text>
+      <Text>I am the chat screen</Text>
     </View>
   );
 };

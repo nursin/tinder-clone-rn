@@ -1,13 +1,19 @@
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import React from 'react';
-// import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/useAuth';
+import tw from 'tailwind-react-native-classnames';
 
 const LoginScreen = () => {
-    // const { user } = useAuth();
-    // console.log(user)
+    const { signInWithGoogle } = useAuth();
+    console.log(signInWithGoogle)
     return (
         <View>
-            <Text>Login to the app</Text>
+            <Text style={tw`text-center pt-3`}>Login to the app</Text>
+            <Button 
+            style={tw`bg-black`} 
+            title='login' 
+            onPress={signInWithGoogle}
+            />
         </View>
     );
 };

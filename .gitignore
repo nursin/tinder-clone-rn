@@ -14,3 +14,9 @@ web-build/
 .DS_Store
 google-services.json
 GoogleService-Info.plist
+
+# environment variables
+.env
+
+# firebase
+firebase.js
