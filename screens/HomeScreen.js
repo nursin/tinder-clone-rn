@@ -70,7 +70,26 @@ const HomeScreen = () => {
                     cardIndex={0}
                     animateCardOpacity
                     verticalSwipe={false}
-                    overlayLabels={}
+                    overlayLabels={{
+                        left: {
+                            title: "NOPE",
+                            style: {
+                                label: {
+                                    textAlign: "right",
+                                    color: "red",
+                                },
+                            },
+                        },
+                        right: {
+                            title: "MATCH",
+                            style: {
+                                label: {
+                                    textAlign: "left",
+                                    color: "green",
+                                },
+                            },
+                        },
+                    }}
                     renderCard={(card) => (
                         <View
                             key={card.id}
