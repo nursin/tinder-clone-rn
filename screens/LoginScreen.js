@@ -1,20 +1,35 @@
-import { View, Text, Button } from 'react-native';
-import React from 'react';
+import { View, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import React, { useLayoutEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import tw from 'tailwind-react-native-classnames';
+import { useNavigation } from '@react-navigation/native';
 
 const LoginScreen = () => {
-    const { signInWithGoogle } = useAuth();
-    console.log(signInWithGoogle)
+    const { signInWithGoogle, loading } = useAuth();
+    const navigation = useNavigation();
+
+    // useLayoutEffect(() => {
+    //     navigation.setOptions({
+    //         headerShown: false,
+    //     })
+    // }, []);
 
     return (
-        <View>
-            <Text style={tw`text-center pt-3`}>Login to the app</Text>
-            <Button 
-            style={tw`bg-black`} 
-            title='login' 
-            onPress={signInWithGoogle}
-            />
+        <View style={tw`flex-1`}>
+            <ImageBackground
+                resizeMode="cover"
+                style={tw`flex-1`}
+                source={{ uri: "https://tinder.com/static/tinder.png" }}
+            >
+                <TouchableOpacity
+                    style={[tw`absolute bottom-20 w-52 bg-white p-4 rounded-2xl`,
+                    { marginHorizontal: "25%" }
+                    ]}
+                    onPress={signInWithGoogle}
+                >
+                    <Text style={tw`font-semibold text-center`}>{loading ? "Loading ..." : "Login"}</Text>
+                </TouchableOpacity>
+            </ImageBackground>
         </View>
     );
 };
