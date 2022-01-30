@@ -1,5 +1,5 @@
 import { View, Text, Button, SafeAreaView, TouchableOpacity, Image, StyleSheet } from 'react-native';
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import useAuth from '../hooks/useAuth';
 import tw from 'tailwind-react-native-classnames';
@@ -36,7 +36,8 @@ const DUMMY_DATA = [
 const HomeScreen = () => {
     const navigation = useNavigation();
     const { user, logout } = useAuth();
-    console.log(user)
+    const swipeRef = useRef(null);
+
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -64,12 +65,20 @@ const HomeScreen = () => {
             {/* Cards */}
             <View style={tw`flex-1 -mt-6`}>
                 <Swiper
+                    ref={swipeRef}
                     containerStyle={{ backgroundColor: "transparent" }}
                     cards={DUMMY_DATA}
                     stackSize={5}
                     cardIndex={0}
                     animateCardOpacity
                     verticalSwipe={false}
+                    onSwipedLeft={() => {
+                        console.log('Swipe PASS')
+                    }}
+                    onSwipedRight={() => {
+                        console.log("Swipe MATCH")
+                    }}
+                    backgroundColor='#4FD0E9'
                     overlayLabels={{
                         left: {
                             title: "NOPE",
@@ -99,7 +108,7 @@ const HomeScreen = () => {
                                 style={tw`absolute top-0 h-full w-full rounded-xl`}
                                 source={{ uri: card.photoURL }}
                             />
-                            <View style={[tw`absolute bottom-0 bg-white w-full h-20 px-6 py-2 flex-row justify-between items-between rounded-b-xl`, styles.cardShadow]}>
+                            <View style={[tw`absolute bottom-0 bg-white w-full h-20 px-6 py-2 flex-row justify-between items-center rounded-b-xl`, styles.cardShadow]}>
                                 <View>
                                     <Text style={tw`text-xl font-bold`}>{card.firstName} {card.lastName}</Text>
                                     <Text>{card.occupation}</Text>
@@ -111,6 +120,14 @@ const HomeScreen = () => {
                 />
             </View>
 
+            <View style={tw`flex flex-row justify-evenly`}>
+                <TouchableOpacity style={tw`items-center justify-center rounded-full w-16 h-16 bg-red-200`}>
+                    <Entypo name="cross" size={24} color="red"/>
+                </TouchableOpacity>
+                <TouchableOpacity style={tw`items-center justify-center rounded-full w-16 h-16 bg-green-200`}>
+                    <AntDesign name="heart" size={24} color="green"/>
+                </TouchableOpacity>
+            </View>
         </SafeAreaView>
     );
 };
