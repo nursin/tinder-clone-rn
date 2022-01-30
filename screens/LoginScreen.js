@@ -6,6 +6,7 @@ import tw from 'tailwind-react-native-classnames';
 const LoginScreen = () => {
     const { signInWithGoogle } = useAuth();
     console.log(signInWithGoogle)
+
     return (
         <View>
             <Text style={tw`text-center pt-3`}>Login to the app</Text>
