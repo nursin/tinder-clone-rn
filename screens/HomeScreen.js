@@ -52,7 +52,7 @@ const HomeScreen = () => {
                 <TouchableOpacity onPress={logout}>
                     <Image style={tw`h-10 w-10 rounded-full`} source={{ uri: user.photoURL }} />
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate("Modal")}>
                     <Image style={tw`h-14 w-14 rounded-full`} source={require("../assets/tinder_logo.png")} />
                 </TouchableOpacity>
 
@@ -121,11 +121,17 @@ const HomeScreen = () => {
             </View>
 
             <View style={tw`flex flex-row justify-evenly`}>
-                <TouchableOpacity style={tw`items-center justify-center rounded-full w-16 h-16 bg-red-200`}>
-                    <Entypo name="cross" size={24} color="red"/>
+                <TouchableOpacity
+                    onPress={() => swipeRef.current.swipeLeft()}
+                    style={tw`items-center justify-center rounded-full w-16 h-16 bg-red-200 mb-2`}
+                >
+                    <Entypo name="cross" size={24} color="red" />
                 </TouchableOpacity>
-                <TouchableOpacity style={tw`items-center justify-center rounded-full w-16 h-16 bg-green-200`}>
-                    <AntDesign name="heart" size={24} color="green"/>
+                <TouchableOpacity
+                    onPress={() => swipeRef.current.swipeRight()}
+                    style={tw`items-center justify-center rounded-full w-16 h-16 bg-green-200 mb-2`}
+                >
+                    <AntDesign name="heart" size={24} color="green" />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
